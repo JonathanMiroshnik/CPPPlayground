@@ -13,15 +13,20 @@ class uniqueptr {
 
     ~uniqueptr();
 
-    T* operator=(T* input_pointer);
-    T operator*();
-    operator bool();
+    // uniqueptr owns its pointee exclusively, so copying or copy-assigning one
+    // from another would duplicate ownership and let two destructors free the
+    // same pointer. Take ownership of a raw T* instead.
+    uniqueptr(const uniqueptr&) = delete;
+    uniqueptr& operator=(const uniqueptr&) = delete;
+
+    uniqueptr& operator=(T* input_pointer);
+    T& operator*();
+    explicit operator bool();
 
     void print_status();
 
     private:
-    bool used = false;
-    T* pointer;
+    T* pointer = nullptr;
 };
 
 

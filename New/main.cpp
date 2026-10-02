@@ -42,12 +42,19 @@ int main() {
 	// Lua portion tests ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 	int* intpointer = static_cast<int *>(malloc(sizeof(int)));
-	auto up1 = new uniqueptr<int>(intpointer);
-	up1->print_status();
-	if (up1) std::cout << "here1" << '\n';
-	delete up1;
-	up1->print_status();
-	if (up1) std::cout << "here2" << '\n';
+	*intpointer = 42;
+
+	// Stack-allocated unique pointer: no `new`, no `delete`, so there is no leak
+	// and no use-after-free. The destructor runs automatically at the end of main.
+	uniqueptr<int> up1{intpointer};
+	up1.print_status();                        // Used2 + the address it owns
+	std::cout << "*up1 = " << *up1 << '\n';    // 42: operator* returns a reference
+	if (up1) std::cout << "here1" << '\n';     // true: we still own the pointer
+
+	up1 = nullptr;                             // release early (frees intpointer)
+	std::cout << "after release: ";
+	up1.print_status();                        // Unused
+	if (up1) std::cout << "here2" << '\n';     // false: nothing is printed
 
 	return 0;
 }

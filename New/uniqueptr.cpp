@@ -9,50 +9,40 @@
 #include <ostream>
 
 template <typename T>
-uniqueptr<T>::uniqueptr(T* input_pointer) {
-    if (used) return;
-    pointer = input_pointer;
-    used = true;
-}
+uniqueptr<T>::uniqueptr(T* input_pointer) : pointer(input_pointer) {}
 
 template <typename T>
 uniqueptr<T>::~uniqueptr() {
-    if (used || pointer == nullptr) {
-        free(pointer);
+    free(pointer);   // free(nullptr) is guaranteed to do nothing, so no check needed
+}
+
+template <typename T>
+uniqueptr<T>& uniqueptr<T>::operator=(T* input_pointer) {
+    if (input_pointer != pointer) {
+        free(pointer);              // release what we owned before
+        pointer = input_pointer;    // then take ownership of the new pointer
     }
-    used = false;
+    return *this;
 }
 
 template <typename T>
-T* uniqueptr<T>::operator=(T* input_pointer) {
-    pointer = input_pointer;
-    used = true;
-    return input_pointer;
-}
-
-// template <typename T>
-// T uniqueptr<T>::operator->() {
-
-// }
-
-template <typename T>
-T uniqueptr<T>::operator*() {
+T& uniqueptr<T>::operator*() {
     return *pointer;
 }
 
 template <typename T>
 uniqueptr<T>::operator bool() {
-    return pointer != nullptr;
+    return pointer != nullptr;      // true == we own something
 }
 
 template <typename T>
 void uniqueptr<T>::print_status() {
-    if (!this->used) {
+    if (pointer == nullptr) {
         std::cout << "Unused" << std::endl;
         return;
     }
     std::cout << "Used2" << '\n';
-    std::cout << "Pointer being protected by the unique pointer: "<< this->pointer << std::endl;
+    std::cout << "Pointer being protected by the unique pointer: "<< pointer << std::endl;
 };
 
 // The member definitions above live in this translation unit, so the compiler
