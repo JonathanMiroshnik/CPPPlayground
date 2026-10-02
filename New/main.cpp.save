@@ -1,0 +1,51 @@
+#include <iostream>
+#include "lua.hpp"
+
+class Agent {
+	// TODO: Get the initial master prompt from some file
+	static const std::string = getFile(TODO);
+
+	constructor () {
+		lua_State* L = luaL_newstate();
+		std::vector<Node*> nodes = new std::vector<Node*>();
+	}
+	
+	std::string createStrategy(LLMConnection conn) {
+		// TODO: Create the req by getting information on all the nodes and adding in a master prompt of some sort
+		return conn.sendRequest(req);
+	}
+}
+
+class LLMConnection {
+	constructor () {
+		std::string url;
+		std::string model;
+	}
+
+	std::string sendRequest(std::string request) {
+		url -> HTTP sendRequest(request, model);
+	}
+}
+
+// TODO docs - a Node in the distributed network
+class Node {
+	constructor () {
+		// TODO the double can switch with some more general and expressive "Matrix"
+		std::vector<std::pair<Node*, double>> connections = new std::vector<std::pair<Node*, double>>();
+	}
+
+	int addConnection() {
+		this.connections append? TODO
+	}
+	int removeConnection() {
+		// TODO find and remove? hashmap instead of vector?
+	}
+}
+
+int main() {
+	std::cout << "Hello World!" << std::endl;
+	lua_State* L = luaL_newstate();
+	luaL_dostring(L, "print(\"hello\")");
+	lua_close(L);
+	return 0;
+}
