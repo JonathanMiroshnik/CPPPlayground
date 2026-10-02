@@ -17,6 +17,31 @@ uniqueptr<T>::~uniqueptr() {
 }
 
 template <typename T>
+T* uniqueptr<T>::get() {
+    return pointer;
+}
+
+template <typename T>
+T* uniqueptr<T>::release() {
+    T* returner = pointer;
+    pointer = nullptr;
+    return returner;
+}
+
+template <typename T>
+void uniqueptr<T>::reset(T* input_pointer) {
+    delete pointer;
+    pointer = input_pointer;
+}
+
+template <typename T>
+void uniqueptr<T>::swap(uniqueptr<T>& other_pointer) {
+    T* returner = pointer;
+    this->reset(other_pointer.get());
+    other_pointer.reset(returner);
+}
+
+template <typename T>
 uniqueptr<T>& uniqueptr<T>::operator=(T* input_pointer) {
     if (input_pointer != pointer) {
         free(pointer);              // release what we owned before

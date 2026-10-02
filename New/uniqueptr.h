@@ -19,6 +19,11 @@ class uniqueptr {
     uniqueptr(const uniqueptr&) = delete;
     uniqueptr& operator=(const uniqueptr&) = delete;
 
+    T* get();
+    T* release();
+    void reset(T*);
+    void swap(uniqueptr<T> &);
+
     uniqueptr& operator=(T* input_pointer);
     T& operator*();
     explicit operator bool();
