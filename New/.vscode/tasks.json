@@ -1,0 +1,89 @@
+{
+    // Runs the project Makefile. The default build task is bound to
+    // Ctrl+Shift+B (Cmd+Shift+B on macOS) and is also used as the
+    // preLaunchTask for F5 (Start Debugging).
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "make",
+            "detail": "Build cpplua (build/cpplua)",
+            "type": "shell",
+            "command": "make",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "make run",
+            "detail": "Build and run cpplua",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "run"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "test",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "make clean",
+            "detail": "Remove build artefacts",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "clean"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        },
+        {
+            "label": "make rebuild",
+            "detail": "Clean then build cpplua",
+            "type": "shell",
+            "command": "make",
+            "args": [
+                "rebuild"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true
+            }
+        }
+    ]
+}

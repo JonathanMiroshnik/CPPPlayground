@@ -1,0 +1,14 @@
+# Build output
+/build/
+
+# CMake artefacts (kept in case the CMake workflow is used later)
+/build-*/
+cmake-build-*/
+
+# Editor / IDE
+.idea/
+
+# Object, dependency and binary clutter
+*.o
+*.d
+*.so

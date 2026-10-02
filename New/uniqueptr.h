@@ -4,29 +4,24 @@
 
 #ifndef CPPLUA_UNIQUEPTR_H
 #define CPPLUA_UNIQUEPTR_H
-#include <cstdlib>
 
 
+template <typename T>
 class uniqueptr {
     public:
-    uniqueptr(void* input_pointer) {
-        if (used) return;
-        pointer = input_pointer;
-        used = true;
-    }
+    uniqueptr(T* input_pointer);
 
-    ~uniqueptr() {
-        if (used) {
-            free(pointer);
-        }
-        used = false;
-    }
+    ~uniqueptr();
+
+    T* operator=(T* input_pointer);
+    T operator*();
+    operator bool();
 
     void print_status();
 
     private:
     bool used = false;
-    void* pointer;
+    T* pointer;
 };
 
 

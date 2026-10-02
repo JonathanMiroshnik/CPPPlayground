@@ -1,0 +1,22 @@
+{
+    // IntelliSense configuration for the C/C++ extension.
+    // Matches the flags used by the Makefile (see CXXFLAGS / INCLUDES).
+    "version": 4,
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/third_party/lua/include"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "compilerArgs": [
+                "-std=c++17"
+            ],
+            "cStandard": "c17",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ]
+}

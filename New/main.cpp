@@ -42,8 +42,12 @@ int main() {
 	// Lua portion tests ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 	int* intpointer = static_cast<int *>(malloc(sizeof(int)));
-	auto up1 = new uniqueptr(intpointer);
+	auto up1 = new uniqueptr<int>(intpointer);
 	up1->print_status();
+	if (up1) std::cout << "here1" << '\n';
+	delete up1;
+	up1->print_status();
+	if (up1) std::cout << "here2" << '\n';
 
 	return 0;
 }
